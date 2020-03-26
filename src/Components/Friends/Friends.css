@@ -1,0 +1,13 @@
+/* .user-container{
+    display: flex;
+    background-color: lightsalmon;
+    color: lightseagreen;
+    margin-left: 30%;
+  }
+   */
+
+  .user-container img{
+      display: inline;
+      height: 70px;
+      width: 50px;
+  }
