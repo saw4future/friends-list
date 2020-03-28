@@ -1,13 +1,7 @@
-/* .user-container{
+.friends{
     display: flex;
-    background-color: lightsalmon;
-    color: lightseagreen;
-    margin-left: 30%;
-  }
-   */
-
-  .user-container img{
-      display: inline;
-      height: 70px;
-      width: 50px;
-  }
+    border-bottom: 1px solid lightcoral;
+    margin-bottom: 5px;
+    margin-right: 10px;
+    padding-bottom: 5px;
+}

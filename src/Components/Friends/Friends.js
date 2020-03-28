@@ -1,44 +1,46 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../App';
 import './Friends.css'; 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUserFriends } from '@fortawesome/free-solid-svg-icons'
 
-const Friends = () => {
-
+const Friends = (props) => {
+    const [data, setData] = useState([]); 
     useEffect(() =>{
         fetch('https://jsonplaceholder.typicode.com/users')
           .then(res => res.json())
-          .then(data => showUserNames(data))
-    
-          function showUserNames(data){
-            let usersHTML = ''; 
-            data.forEach(user => {
-              usersHTML = usersHTML + `<div style={{
-                background-color: lightsalmon;
-                color: lightseagreen;
-                margin-left: 30%;
-              }className="user-all">
-                <img src="https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"alt="" />
-                <h2>${user.name}</h2>
-                <p>Email: ${user.email}</p>
-                <p>Salary: 10</small></p>
-                    <button className="main-button">Count</button>
-                <br/> 
-              </div>`
-            });
-            const userContainer = document.getElementById('user-container'); 
-            userContainer.innerHTML = usersHTML; 
-          }
+          .then(data => setData(data))
           })
+    
+    
+    const [photos, setPhotos] = useState([]); 
+
+    useEffect(() =>{
+      fetch('https://jsonplaceholder.typicode.com/photos')
+      .then(res => res.json())
+      .then(photos => setPhotos(photos))
+    })
+    
+    const user = {salary: 300}; 
+
     return (
         <div className="friends">
-            <div className>
-              
-            </div>
-            <div id="user-container" className="user-container">
-                <div>
-                    <h2> </h2>
+            <div className="user">
+               {data.map(data =>(
+                  <div>
+                    {photos.slice(0,1).map(photos => (
+                <img src={photos.thumbnailUrl} alt=""/>
+                ))}
+                    <h2>{data.username}</h2>
+                    <h3>{data.email}</h3>
+                    <h3><small>"Salary: {user.salary}"</small></h3>
+                    <button 
+                    className="main-button" 
+                    onClick = {() => props.handleAddProduct(props.product)}
+                    > 
+                        <FontAwesomeIcon icon={faUserFriends} /> add to cart</button>
                 </div>
-                
+                ))}
             </div>
         </div>
     );
